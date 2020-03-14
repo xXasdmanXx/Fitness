@@ -7,6 +7,7 @@
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Password { get; set; }
         public DateTime BirthDate { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }
@@ -14,11 +15,12 @@
         public DateTime RegisterDate { get; set; }
         public string Email { get; set; }
 
-        public Person(int id, string name, DateTime birthDate, 
+        public Person(int id, string name, string password, DateTime birthDate, 
                       double height, double weight, string male, DateTime registerDate, string email)
         {
             this.ID = id;
             this.Name = name;
+            this.Password = password;
             this.BirthDate = birthDate;
             this.Height = height;
             this.Weight = weight;
@@ -32,6 +34,7 @@
             StringBuilder b = new StringBuilder("\nID: ");
             b.Append(this.ID);
             b.Append("\tName: "); b.Append(this.Name);
+            b.Append("\tPassword: "); b.Append(this.Password);
             b.Append("\tBirthDate: "); b.Append(this.BirthDate);
             b.Append("\tHeight: "); b.Append(this.Height);
             b.Append("\tWeight: "); b.Append(this.Weight);

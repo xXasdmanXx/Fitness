@@ -14,14 +14,15 @@
             try
             {
                 this.cmd.Parameters.AddWithValue("@name", p.Name);
+                this.cmd.Parameters.AddWithValue("@pw", p.Password);
                 this.cmd.Parameters.AddWithValue("@birth", p.BirthDate);
                 this.cmd.Parameters.AddWithValue("@height", p.Height);
                 this.cmd.Parameters.AddWithValue("@weight", p.Weight);
                 this.cmd.Parameters.AddWithValue("@male", p.Male);
                 this.cmd.Parameters.AddWithValue("@reg", p.RegisterDate);
                 this.cmd.Parameters.AddWithValue("@mail", p.Email);
-                this.cmd.CommandText = "insert into Person(Name, BirthDate, Height, Weight, Male, RegisterDate, Email) " +
-                                    "values(@name, @birth, @height, @weight, @male, @reg, @mail);";
+                this.cmd.CommandText = "insert into Person(Name, Password, BirthDate, Height, Weight, Male, RegisterDate, Email) " +
+                                    "values(@name, @pw, @birth, @height, @weight, @male, @reg, @mail);";
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
                     this.cmd.ExecuteNonQuery();
@@ -47,12 +48,13 @@
                         res.Add(new Person(
                                     this.read.GetInt32(0), //["ID"],
                                     this.read.GetString(1), //["Name"],
-                                    this.read.GetDateTime(2), //["BirthDate"],
-                                    this.read.GetDouble(3), //["Height"],
-                                    this.read.GetDouble(4), //["Weight"],
-                                    this.read.GetString(5), //["Male"],
-                                    this.read.GetDateTime(6), //["RegisterDate"],
-                                    this.read.GetString(7) //["Email"] )
+                                    this.read.GetString(2), //["Password"],
+                                    this.read.GetDateTime(3), //["BirthDate"],
+                                    this.read.GetDouble(4), //["Height"],
+                                    this.read.GetDouble(5), //["Weight"],
+                                    this.read.GetString(6), //["Male"],
+                                    this.read.GetDateTime(7), //["RegisterDate"],
+                                    this.read.GetString(8) //["Email"] )
                                 ));
                     return res;
                 }
@@ -76,12 +78,13 @@
                         return new Person(
                                     this.read.GetInt32(0), //["ID"],
                                     this.read.GetString(1), //["Name"],
-                                    this.read.GetDateTime(2), //["BirthDate"],
-                                    this.read.GetDouble(3), //["Height"],
-                                    this.read.GetDouble(4), //["Weight"],
-                                    this.read.GetString(5), //["Male"],
-                                    this.read.GetDateTime(6), //["RegisterDate"],
-                                    this.read.GetString(7)); //["Email"] );
+                                    this.read.GetString(2), //["Password"],
+                                    this.read.GetDateTime(3), //["BirthDate"],
+                                    this.read.GetDouble(4), //["Height"],
+                                    this.read.GetDouble(5), //["Weight"],
+                                    this.read.GetString(6), //["Male"],
+                                    this.read.GetDateTime(7), //["RegisterDate"],
+                                    this.read.GetString(8)); //["Email"] )
                     return null;
                 }
                 else throw new Exception();

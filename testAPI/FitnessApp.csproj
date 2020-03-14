@@ -139,7 +139,10 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DataAccessController.cs" />
+    <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\ExerciseDataAccessController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
+    <Compile Include="Controllers\MealDataAccessController.cs" />
     <Compile Include="Controllers\PersonDataAccessController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">

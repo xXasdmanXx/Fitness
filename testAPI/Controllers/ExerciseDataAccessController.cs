@@ -17,7 +17,7 @@
                 this.cmd.Parameters.AddWithValue("@metsID", e.Mets_ID);
                 this.cmd.Parameters.AddWithValue("@date", e.Date);
                 this.cmd.CommandText = "insert into Exercise(Person_ID, Mets_ID, Date) " +
-                                    "values(@personID, @metsID, @date);";
+                                       "values(@personID, @metsID, @date);";
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
                     this.cmd.ExecuteNonQuery();
@@ -57,7 +57,7 @@
             List<Exercise> res = new List<Exercise>();
             try
             {
-                this.cmd.CommandText = @"select * from Exercise where ID = @id";
+                this.cmd.CommandText = @"select * from Exercise where id = @id";
                 this.cmd.Parameters.AddWithValue("@id", id);
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
@@ -83,7 +83,7 @@
             try
             {
                 cmd.Parameters.AddWithValue("@id", id);
-                cmd.CommandText = "delete from Exercise where ID = @id;";
+                cmd.CommandText = "delete from Exercise where id = @id;";
                 conn.Open();
                 if (conn.State.Equals(ConnectionState.Open))
                     this.cmd.ExecuteNonQuery();
