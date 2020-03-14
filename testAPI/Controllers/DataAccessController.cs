@@ -4,7 +4,7 @@
 
     public class DataAccessController
     {
-        protected readonly string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\progd\Desktop\FitnessApp\testAPI\Fitness.mdf;Integrated Security=True;Connect Timeout=30";
+        protected readonly string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + System.AppDomain.CurrentDomain.BaseDirectory + "Fitness.mdf;Integrated Security=True;Connect Timeout=30";
         protected SqlConnection conn;
         protected SqlCommand cmd;
         protected SqlDataReader read;
@@ -14,6 +14,7 @@
             this.conn = new SqlConnection(this.connectionString);
             this.cmd = new SqlCommand();
             this.cmd.Connection = this.conn;
+            System.Diagnostics.Debug.WriteLine("\n\nConnection string is: " + connectionString + "\n\n");
         }
 
         protected void EndQuery()

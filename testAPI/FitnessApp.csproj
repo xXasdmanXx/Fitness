@@ -120,9 +120,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Fitness.mdf" />
+    <Content Include="Fitness.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fitness_log.ldf">
       <DependentUpon>Fitness.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
