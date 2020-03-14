@@ -4,29 +4,21 @@
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
-    using Newtonsoft.Json;
-    using System.Collections.Generic;
 
     public class MealController : ApiController
     {
         // GET: api/Meal
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            List<string> res = new List<string>();
-            foreach (var item in new MealDataAccessController().Select())
-                res.Add(JsonConvert.SerializeObject(item));
-            return res;
+            return Json(new MealDataAccessController().Select());
         }
 
         // GET: api/Meal/5
         [HttpGet]
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            Meal res = new MealDataAccessController().Select(id);
-            if (res != null)
-                return JsonConvert.SerializeObject(res);
-            else return null;
+            return Json(new MealDataAccessController().Select(id));
         }
 
         // POST: api/Meal

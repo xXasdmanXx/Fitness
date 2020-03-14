@@ -1,8 +1,6 @@
 ﻿namespace FitnessApp.Controllers
 {
     using Models;
-    using Newtonsoft.Json;
-    using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
     using System.Web.Http;
@@ -11,22 +9,16 @@
     {
         // GET: api/Exercise
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            List<string> res = new List<string>();
-            foreach (var item in new ExerciseDataAccessController().Select())
-                res.Add(JsonConvert.SerializeObject(item));
-            return res;
+            return Json(new ExerciseDataAccessController().Select());
         }
 
         // GET: api/Exercise/5
         [HttpGet]
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            Exercise res = new ExerciseDataAccessController().Select(id);
-            if (res != null)
-                return JsonConvert.SerializeObject(res);
-            else return null;
+            return Json(new ExerciseDataAccessController().Select(id));
         }
 
         // POST: api/Exercise
