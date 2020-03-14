@@ -4,7 +4,8 @@
 
     public class DataAccessController
     {
-        protected readonly string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + System.AppDomain.CurrentDomain.BaseDirectory + "Fitness.mdf;Integrated Security=True;Connect Timeout=30";
+        protected readonly string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
+            System.AppDomain.CurrentDomain.BaseDirectory + "Fitness.mdf;Integrated Security=True;Connect Timeout=30";
         protected SqlConnection conn;
         protected SqlCommand cmd;
         protected SqlDataReader read;
