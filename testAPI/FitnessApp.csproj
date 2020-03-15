@@ -141,6 +141,8 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DailyController.cs" />
+    <Compile Include="Controllers\DailyDataAccessController.cs" />
     <Compile Include="Controllers\DataAccessController.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\ExerciseDataAccessController.cs" />
@@ -151,9 +153,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Daily.cs" />
+    <Compile Include="Models\DailyAll.cs" />
     <Compile Include="Models\Exercise.cs" />
+    <Compile Include="Models\Food.cs" />
     <Compile Include="Models\FoodNutritions.cs" />
     <Compile Include="Models\Meal.cs" />
+    <Compile Include="Models\Met.cs" />
     <Compile Include="Models\Mets.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

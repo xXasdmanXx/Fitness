@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text;
 
-    public class Food
+    public class FoodNutritions
     {
         #region Properties
         public string Name { get; set; }
@@ -18,7 +18,7 @@
         public List<string> Units { get; set; }
         #endregion Properties
 
-        public Food(string name, string shortName,
+        public FoodNutritions(string name, string shortName,
                     double protein, double fat, double carbs, double calories, 
                     double water, double sugar, double cholesterol, List<string> units)
         {

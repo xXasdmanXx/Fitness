@@ -15,7 +15,6 @@
             this.conn = new SqlConnection(this.connectionString);
             this.cmd = new SqlCommand();
             this.cmd.Connection = this.conn;
-            System.Diagnostics.Debug.WriteLine("\n\nConnection string is: " + connectionString + "\n\n");
         }
 
         protected void EndQuery()
