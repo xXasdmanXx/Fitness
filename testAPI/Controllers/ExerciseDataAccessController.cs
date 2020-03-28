@@ -16,8 +16,9 @@
                 this.cmd.Parameters.AddWithValue("@personID", e.Person_ID);
                 this.cmd.Parameters.AddWithValue("@metsID", e.Mets_ID);
                 this.cmd.Parameters.AddWithValue("@date", e.Date);
-                this.cmd.CommandText = "insert into Exercise(Person_ID, Mets_ID, Date) " +
-                                       "values(@personID, @metsID, @date);";
+                this.cmd.Parameters.AddWithValue("@duration", e.Duration);
+                this.cmd.CommandText = "insert into Exercise(Person_ID, Mets_ID, Date, Duration) " +
+                                       "values(@personID, @metsID, @date, @duration);";
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
                     this.cmd.ExecuteNonQuery();
@@ -43,7 +44,8 @@
                                     this.read.GetInt32(0), //["id"],
                                     this.read.GetInt32(1), //["Person_ID"],
                                     this.read.GetInt32(2), //["Mets_ID"],
-                                    this.read.GetDateTime(3) //["Date"],
+                                    this.read.GetDateTime(3), //["Date"],
+                                    this.read.GetDouble(4) //["Duration"]
                                 ));
                     return res;
                 }
@@ -68,7 +70,8 @@
                                     this.read.GetInt32(0), //["id"],
                                     this.read.GetInt32(1), //["Person_ID"],
                                     this.read.GetInt32(2), //["Mets_ID"],
-                                    this.read.GetDateTime(3) //["Date"],
+                                    this.read.GetDateTime(3), //["Date"],
+                                    this.read.GetDouble(4) //["Duration"],
                                     );
                     return null;
                 }
