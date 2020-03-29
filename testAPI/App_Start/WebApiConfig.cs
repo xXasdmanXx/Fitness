@@ -13,6 +13,11 @@
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Routes.MapHttpRoute(
+                name: "SearchApi",
+                routeTemplate: "api/Search/{controller}",
+                defaults: new { id = RouteParameter.Optional }
+                );
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
     }
