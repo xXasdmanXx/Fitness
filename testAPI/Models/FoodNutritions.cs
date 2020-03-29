@@ -6,6 +6,7 @@
     public class FoodNutritions
     {
         #region Properties
+        public long ID { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
         public double Protein { get; set; }      // (g / 100g)
@@ -22,6 +23,22 @@
                     double protein, double fat, double carbs, double calories, 
                     double water, double sugar, double cholesterol, List<string> units)
         {
+            this.Name = name;
+            this.ShortName = shortName;
+            this.Protein = protein;
+            this.Fat = fat;
+            this.Carbs = carbs;
+            this.Calories = calories;
+            this.Water = water;
+            this.Sugar = sugar;
+            this.Cholesterol = cholesterol;
+            this.Units = units;
+        }
+        public FoodNutritions(long id, string name, string shortName,
+                    double protein, double fat, double carbs, double calories,
+                    double water, double sugar, double cholesterol, List<string> units)
+        {
+            this.ID = id;
             this.Name = name;
             this.ShortName = shortName;
             this.Protein = protein;

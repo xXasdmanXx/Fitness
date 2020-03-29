@@ -14,7 +14,7 @@
             {
                 this.cmd.Parameters.AddWithValue("@top", value.Top);
                 this.cmd.Parameters.AddWithValue("@query", value.Query);
-                this.cmd.CommandText = @"select top (@top) name, shortName, protein, fat, carbs, calories, water, sugar, cholesterol, unit1, unit2, unit3 " +
+                this.cmd.CommandText = @"select top (@top) id, name, shortName, protein, fat, carbs, calories, water, sugar, cholesterol, unit1, unit2, unit3 " +
                                        @"from FoodNutritions where name like concat('%',@query,'%');";
                 
                 this.conn.Open();
@@ -24,20 +24,21 @@
                     while (this.read.Read())
                     {
                         List<string> units = new List<string>();
-                        units.Add(Check(read.GetString(9)));
-                        units.Add(Check(read.GetString(10)));
-                        units.Add(Check(read.GetString(11)));
+                        units.Add(Check(this.read.GetString(10)));
+                        units.Add(Check(this.read.GetString(11)));
+                        units.Add(Check(this.read.GetString(12)));
                         units.TrimExcess();
                         res.Add(new FoodNutritions(
-                            Check(read.GetString(0)),
-                            Check(read.GetString(1)),
-                            read.GetDouble(2),
-                            read.GetDouble(3),
-                            read.GetDouble(4),
-                            read.GetDouble(5),
-                            read.GetDouble(6),
-                            read.GetDouble(7),
-                            read.GetDouble(8),
+                            this.read.GetInt64(0),
+                            Check(this.read.GetString(1)),
+                            Check(this.read.GetString(2)),
+                            this.read.GetDouble(3),
+                            this.read.GetDouble(4),
+                            this.read.GetDouble(5),
+                            this.read.GetDouble(6),
+                            this.read.GetDouble(7),
+                            this.read.GetDouble(8),
+                            this.read.GetDouble(9),
                             units
                             ));
                     }
