@@ -47,14 +47,14 @@
                     while (this.read.Read())
                         res.Add(new Person(
                                     this.read.GetInt32(0), //["ID"],
-                                    this.read.GetString(1), //["Name"],
-                                    this.read.GetString(2), //["Password"],
+                                    this.Check(this.read.GetString(1)), //["Name"],
+                                    this.Check(this.read.GetString(2)), //["Password"],
                                     this.read.GetDateTime(3), //["BirthDate"],
                                     this.read.GetDouble(4), //["Height"],
                                     this.read.GetDouble(5), //["Weight"],
-                                    this.read.GetString(6), //["Male"],
+                                    this.Check(this.read.GetString(6)), //["Male"],
                                     this.read.GetDateTime(7), //["RegisterDate"],
-                                    this.read.GetString(8) //["Email"] )
+                                    this.Check(this.read.GetString(8)) //["Email"] )
                                 ));
                     return res;
                 }
@@ -77,14 +77,14 @@
                     while (this.read.Read())
                         return new Person(
                                     this.read.GetInt32(0), //["ID"],
-                                    this.read.GetString(1), //["Name"],
-                                    this.read.GetString(2), //["Password"],
+                                    this.Check(this.read.GetString(1)), //["Name"],
+                                    this.Check(this.read.GetString(2)), //["Password"],
                                     this.read.GetDateTime(3), //["BirthDate"],
                                     this.read.GetDouble(4), //["Height"],
                                     this.read.GetDouble(5), //["Weight"],
-                                    this.read.GetString(6), //["Male"],
+                                    this.Check(this.read.GetString(6)), //["Male"],
                                     this.read.GetDateTime(7), //["RegisterDate"],
-                                    this.read.GetString(8)); //["Email"] )
+                                    this.Check(this.read.GetString(8))); //["Email"] )
                     return null;
                 }
                 else throw new Exception();

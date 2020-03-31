@@ -26,8 +26,8 @@
                         res.Add(new Mets(
                             this.read.GetInt32(0),
                             this.read.GetDouble(1),
-                            Check(this.read.GetString(2)),
-                            Check(this.read.GetString(3))
+                            this.Check(this.read.GetString(2)),
+                            this.Check(this.read.GetString(3))
                             ));
                     }
                     return res;
@@ -40,11 +40,6 @@
                 return null;
             }
             finally { this.EndQuery(); }
-        }
-
-        private string Check(string str)
-        {
-            return (str.Trim() == null || str.Trim() == "" || str.Trim() == "NULL") ? string.Empty : str;
         }
     }
 }

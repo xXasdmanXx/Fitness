@@ -24,5 +24,10 @@
             this.cmd.CommandText = string.Empty;
             this.read = null;
         }
+
+        protected string Check(string str)
+        {
+            return (str.Trim() == null || str.Trim() == "" || str.Trim() == "NULL") ? string.Empty : str;
+        }
     }
 }

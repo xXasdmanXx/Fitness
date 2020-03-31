@@ -30,8 +30,8 @@
                         units.TrimExcess();
                         res.Add(new FoodNutritions(
                             this.read.GetInt64(0),
-                            Check(this.read.GetString(1)),
-                            Check(this.read.GetString(2)),
+                            this.Check(this.read.GetString(1)),
+                            this.Check(this.read.GetString(2)),
                             this.read.GetDouble(3),
                             this.read.GetDouble(4),
                             this.read.GetDouble(5),
@@ -52,11 +52,6 @@
                 return null;
             }
             finally { this.EndQuery(); }
-        }
-
-        private string Check(string str)
-        {
-            return (str.Trim() == null || str.Trim() == "" || str.Trim() == "NULL") ? string.Empty : str;
         }
     }
 }

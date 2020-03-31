@@ -27,7 +27,7 @@
                     while (this.read.Read())
                         tmpMet.Add(new Met(
                                 this.read.GetDouble(0),  // ["MET"]
-                                this.read.GetString(1),  // ["Detailed"]
+                                this.Check(this.read.GetString(1)),  // ["Detailed"]
                                 this.read.GetDouble(2),  // ["Duration"]
                                 this.read.GetDateTime(3)    // ["Date"]
                                 ));
@@ -65,24 +65,19 @@
                             this.read.GetDouble(3),
                             this.read.GetDouble(4),
                             this.read.GetDouble(5),
-                            Check(this.read.GetString(6)),
-                            Check(this.read.GetString(7)),
-                            Check(this.read.GetString(8)),
+                            this.Check(this.read.GetString(6)),
+                            this.Check(this.read.GetString(7)),
+                            this.Check(this.read.GetString(8)),
                             this.read.GetDateTime(9)));
                 }
                 else throw new Exception();
 
                 tmpMet.TrimExcess();
                 tmpFood.TrimExcess();
-                return new DailyAll(tmpMet,tmpFood, weight);
+                return new DailyAll(tmpMet, tmpFood, weight);
             }
             catch(Exception e) { System.Diagnostics.Debug.WriteLine(e.Message); return null; }
             finally { this.EndQuery(); }
-        }
-
-        private string Check(string str)
-        {
-            return (str.Trim() == null || str.Trim() == "" || str.Trim() == "NULL") ? string.Empty : str;
         }
     }
 }

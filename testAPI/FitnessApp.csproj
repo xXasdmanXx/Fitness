@@ -150,6 +150,8 @@
     <Compile Include="Controllers\ExerciseDataAccessController.cs" />
     <Compile Include="Controllers\ExerciseSearchController.cs" />
     <Compile Include="Controllers\ExerciseSearchDataAcessController.cs" />
+    <Compile Include="Controllers\LogInCredentialsController.cs" />
+    <Compile Include="Controllers\LogInCredentialsDataAccessController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\MealDataAccessController.cs" />
     <Compile Include="Controllers\MealSearchController.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="Models\Daily.cs" />
     <Compile Include="Models\DailyAll.cs" />
     <Compile Include="Models\Exercise.cs" />
+    <Compile Include="Models\LogInCredentials.cs" />
     <Compile Include="Models\Search.cs" />
     <Compile Include="Models\Food.cs" />
     <Compile Include="Models\FoodNutritions.cs" />
