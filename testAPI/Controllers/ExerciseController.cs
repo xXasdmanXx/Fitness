@@ -23,11 +23,11 @@
 
         // POST: api/Exercise
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]Exercise value)
+        public IHttpActionResult Post([FromBody]Exercise value)
         {
             return new ExerciseDataAccessController().Insert(value) ?
-                new HttpResponseMessage(HttpStatusCode.OK) :
-                    new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+                Content(HttpStatusCode.OK,1) :
+                    Content(HttpStatusCode.ExpectationFailed,0);
         }
 
         // DELETE: api/Exercise/5

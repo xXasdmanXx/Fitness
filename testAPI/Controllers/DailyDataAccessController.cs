@@ -7,8 +7,6 @@
 
     public class DailyDataAccessController : DataAccessController
     {
-        public DailyDataAccessController() : base() { }
-
         public DailyAll Select(Daily value)
         {
             List<Met> tmpMet = new List<Met>();
@@ -47,9 +45,7 @@
 
                 this.conn.Close();
 
-                this.cmd.CommandText = @"select Meal.Quantity, 
-		FoodNutritions.name, FoodNutritions.calories, FoodNutritions.carbs, FoodNutritions.fat, 
-		FoodNutritions.protein, FoodNutritions.unit1, FoodNutritions.unit2, FoodNutritions.unit3, Meal.[Date] " +
+                this.cmd.CommandText = @"select Meal.Quantity, FoodNutritions.name, FoodNutritions.calories, FoodNutritions.carbs, FoodNutritions.fat, FoodNutritions.protein, Meal.[Date] " +
                                        @"from Meal inner join FoodNutritions on Meal.FoodNutritions_ID = FoodNutritions.id " +
                                        @"where Meal.Person_ID = @id and Meal.[Date] = convert(date, @date)";
                 List<Food> tmpFood = new List<Food>();
@@ -65,10 +61,7 @@
                             this.read.GetDouble(3),
                             this.read.GetDouble(4),
                             this.read.GetDouble(5),
-                            this.Check(this.read.GetString(6)),
-                            this.Check(this.read.GetString(7)),
-                            this.Check(this.read.GetString(8)),
-                            this.read.GetDateTime(9)));
+                            this.read.GetDateTime(6)));
                 }
                 else throw new Exception();
 

@@ -7,8 +7,6 @@
 
     public class MealDataAccessController : DataAccessController
     {
-        public MealDataAccessController() : base() { }
-
         public bool Insert(Meal m)
         {
             try
@@ -42,11 +40,11 @@
                     this.read = this.cmd.ExecuteReader();
                     while (this.read.Read())
                         res.Add(new Meal(
-                                    this.read.GetInt32(0), //["Iid],
+                                    this.read.GetInt32(0), //["id],
                                     this.read.GetInt32(1), //["Person_ID"],
                                     this.read.GetInt32(2), //["FoodNutritions_ID"],
                                     this.read.GetDouble(3), //["Quantity"],
-                                    this.read.GetDateTime(4) //["Data"],
+                                    this.read.GetDateTime(4) //["Date"],
                                 ));
                     return res;
                 }
@@ -68,11 +66,11 @@
                     this.read = cmd.ExecuteReader();
                     while (this.read.Read())
                         return new Meal(
-                                    this.read.GetInt32(0), //["ID"],
+                                    this.read.GetInt32(0), //["id"],
                                     this.read.GetInt32(1), //["Person_ID"],
                                     this.read.GetInt32(2), //["FoodNutritions_ID"],
                                     this.read.GetDouble(3), //["Quantity"],
-                                    this.read.GetDateTime(4)); //["Data"]
+                                    this.read.GetDateTime(4)); //["Date"]
                     return null;
                 }
                 else throw new Exception();

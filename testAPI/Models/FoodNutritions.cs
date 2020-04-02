@@ -1,6 +1,6 @@
 ﻿namespace FitnessApp.Models
 {
-    using System.Collections.Generic;
+    //using System.Collections.Generic;
     using System.Text;
 
     public class FoodNutritions
@@ -16,12 +16,12 @@
         public double Water { get; set; }        // (g / 100g)
         public double Sugar { get; set; }        // (g / 100g)
         public double Cholesterol { get; set; }  // (mg / 100g)
-        public List<string> Units { get; set; }
+//        public List<string> Units { get; set; }
         #endregion Properties
 
         public FoodNutritions(string name, string shortName,
                     double protein, double fat, double carbs, double calories, 
-                    double water, double sugar, double cholesterol, List<string> units)
+                    double water, double sugar, double cholesterol) //, List<string> units)
         {
             this.Name = name;
             this.ShortName = shortName;
@@ -32,11 +32,11 @@
             this.Water = water;
             this.Sugar = sugar;
             this.Cholesterol = cholesterol;
-            this.Units = units;
+            //this.Units = units;
         }
         public FoodNutritions(long id, string name, string shortName,
                     double protein, double fat, double carbs, double calories,
-                    double water, double sugar, double cholesterol, List<string> units)
+                    double water, double sugar, double cholesterol)//, List<string> units)
         {
             this.ID = id;
             this.Name = name;
@@ -48,7 +48,7 @@
             this.Water = water;
             this.Sugar = sugar;
             this.Cholesterol = cholesterol;
-            this.Units = units;
+            //this.Units = units;
         }
 
         public override string ToString()
@@ -63,13 +63,13 @@
             b.Append("\tWater: "); b.Append(this.Water);
             b.Append("\tSugar: "); b.Append(this.Sugar);
             b.Append("\tCholesterol: "); b.Append(this.Cholesterol);
-            b.Append("\tUNITS: ");
-            foreach (string unit in this.Units)
-            {
-                b.Append(unit);
-                b.Append(",");
-            }
-            b.Remove(b.Length - 1, 1);
+            //b.Append("\tUNITS: ");
+            //foreach (string unit in this.Units)
+            //{
+            //    b.Append(unit);
+            //    b.Append(",");
+            //}
+            //b.Remove(b.Length - 1, 1);
             b.Append("\n");
             return b.ToString();
         }

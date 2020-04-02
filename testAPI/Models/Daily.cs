@@ -4,6 +4,7 @@
 
     public class Daily
     {
+        // Person id
         public int ID { get; set; }
         public DateTime Date { get; set; }
 

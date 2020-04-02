@@ -2,7 +2,6 @@
 {
     using Models;
     using System.Net;
-    using System.Net.Http;
     using System.Web.Http;
 
     public class PersonController : ApiController
@@ -23,11 +22,9 @@
 
         // POST: api/Person
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]Person value)
+        public IHttpActionResult Post([FromBody]Person value)
         {
-            return new PersonDataAccessController().Insert(value) ? 
-                new HttpResponseMessage(HttpStatusCode.OK) : 
-                    new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+            return Content(HttpStatusCode.OK, new PersonDataAccessController().Insert(value));
         }
 
         // DELETE: api/Person/{id}

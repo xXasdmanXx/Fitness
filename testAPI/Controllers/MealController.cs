@@ -23,11 +23,11 @@
 
         // POST: api/Meal
         [HttpPost]
-        public HttpResponseMessage Post([FromBody]Meal value)
+        public IHttpActionResult Post([FromBody]Meal value)
         {
             return new MealDataAccessController().Insert(value) ?
-                new HttpResponseMessage(HttpStatusCode.OK) :
-                    new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+                Content(HttpStatusCode.OK,1) :
+                    Content(HttpStatusCode.ExpectationFailed,0);
         }
 
         // DELETE: api/Meal/5

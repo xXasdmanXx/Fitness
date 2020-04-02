@@ -7,9 +7,7 @@
 
     public class PersonDataAccessController : DataAccessController
     {
-        public PersonDataAccessController() : base() { }
-
-        public bool Insert(Person p)
+        public int Insert(Person p)
         {
             try
             {
@@ -25,12 +23,19 @@
                                     "values(@name, @pw, @birth, @height, @weight, @male, @reg, @mail);";
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
+                {
                     this.cmd.ExecuteNonQuery();
+                    this.conn.Close();
+                }
                 else throw new Exception();
 
-                return true;
+                cmd.CommandText = @"select top 1 ID from Person where Email = @mail";
+                this.conn.Open();
+                this.read = this.cmd.ExecuteReader();
+
+                return this.read.Read() ? read.GetInt32(0) : -1;
             }
-            catch { return false; }
+            catch (Exception e){ System.Diagnostics.Debug.WriteLine("\n\n" + e.Message + "\n\n"); return -1; }
             finally { this.EndQuery(); }
         }
 

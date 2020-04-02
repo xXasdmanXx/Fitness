@@ -7,8 +7,6 @@
 
     public class ExerciseDataAccessController : DataAccessController
     {
-        public ExerciseDataAccessController() : base() { }
-
         public bool Insert(Exercise e)
         {
             try
