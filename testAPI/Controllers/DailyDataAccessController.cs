@@ -17,7 +17,7 @@
                 this.cmd.Parameters.AddWithValue("@date", value.Date);
                 this.cmd.CommandText = @"select Mets.MET, Mets.Detailed, Exercise.Duration, Exercise.[Date] " +
                                         @"from Exercise inner join Mets on Mets.ID = Exercise.Mets_ID " +
-                                        @"where Exercise.Person_ID = @id and Exercise.[Date] = convert(date, @date)";
+                                        @"where Exercise.Person_ID = @id and cast(Exercise.[Date] as date) = convert(date, @date)";
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
                 {
@@ -47,7 +47,7 @@
 
                 this.cmd.CommandText = @"select Meal.Quantity, FoodNutritions.name, FoodNutritions.calories, FoodNutritions.carbs, FoodNutritions.fat, FoodNutritions.protein, Meal.[Date] " +
                                        @"from Meal inner join FoodNutritions on Meal.FoodNutritions_ID = FoodNutritions.id " +
-                                       @"where Meal.Person_ID = @id and Meal.[Date] = convert(date, @date)";
+                                       @"where Meal.Person_ID = @id and cast(Meal.[Date] as date) = convert(date, @date)";
                 List<Food> tmpFood = new List<Food>();
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
