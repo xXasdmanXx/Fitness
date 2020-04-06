@@ -4,6 +4,7 @@
 
     public class Food
     {
+        public int ID { get; set; }
         public double Quantity { get; set; }
         public string Name { get; set; }
         public double Calories { get; set; }
@@ -15,8 +16,9 @@
         //public string Unit3 { get; set; }
         public DateTime Date { get; set; }
 
-        public Food(double q, string n, double cal, double ca, double fa, double pr, /*string u1, string u2, string u3,*/ DateTime date)
+        public Food(int id, double q, string n, double cal, double ca, double fa, double pr, /*string u1, string u2, string u3,*/ DateTime date)
         {
+            this.ID = id;
             this.Quantity = q;
             this.Name = n;
             this.Calories = cal;
