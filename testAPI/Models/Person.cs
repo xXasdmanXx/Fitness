@@ -14,9 +14,10 @@
         public string Male { get; set; }
         public DateTime RegisterDate { get; set; }
         public string Email { get; set; }
+        public int Goal { get; set; }
 
         public Person(int id, string name, string password, DateTime birthDate, 
-                      double height, double weight, string male, DateTime registerDate, string email)
+                      double height, double weight, string male, DateTime registerDate, string email, int goal)
         {
             this.ID = id;
             this.Name = name;
@@ -27,6 +28,7 @@
             this.Male = male;
             this.RegisterDate = registerDate;
             this.Email = email;
+            this.Goal = goal;
         }
 
         public override string ToString()
@@ -41,6 +43,7 @@
             b.Append("\tMale: "); b.Append(this.Male);
             b.Append("\tRegisterDate: "); b.Append(this.RegisterDate);
             b.Append("\tEmail: "); b.Append(this.Email);
+            b.Append("\tGoal: "); b.Append(this.Goal);
             b.Append('\n');
             return b.ToString();
         }

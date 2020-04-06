@@ -28,7 +28,8 @@
                             this.read.GetDouble(5),
                             this.Check(this.read.GetString(6)),
                             this.read.GetDateTime(7),
-                            this.Check(this.read.GetString(8))
+                            this.Check(this.read.GetString(8)),
+                            this.read.GetInt32(9)
                             );
                     else
                         return null;

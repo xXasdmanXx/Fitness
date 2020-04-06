@@ -11,6 +11,7 @@
         {
             List<Met> tmpMet = new List<Met>();
             double weight = 0;
+            int goal = 0;
             try
             {
                 this.cmd.Parameters.AddWithValue("@id", value.ID);
@@ -34,13 +35,16 @@
 
                 this.conn.Close();
 
-                this.cmd.CommandText = @"select Weight from Person where ID = @id";
+                this.cmd.CommandText = @"select top 1 Weight, Goal from Person where ID = @id";
                 this.conn.Open();
                 if(this.conn.State.Equals(ConnectionState.Open))
                 {
                     this.read = this.cmd.ExecuteReader();
-                    while(this.read.Read())
+                    if(this.read.Read())
+                    {
                         weight = this.read.GetDouble(0);
+                        goal = this.read.GetInt32(1);
+                    }
                 }
 
                 this.conn.Close();
@@ -67,7 +71,7 @@
 
                 tmpMet.TrimExcess();
                 tmpFood.TrimExcess();
-                return new DailyAll(tmpMet, tmpFood, weight);
+                return new DailyAll(tmpMet, tmpFood, weight, goal);
             }
             catch(Exception e) { System.Diagnostics.Debug.WriteLine(e.Message); return null; }
             finally { this.EndQuery(); }

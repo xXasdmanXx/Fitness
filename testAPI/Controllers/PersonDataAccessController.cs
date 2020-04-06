@@ -19,8 +19,9 @@
                 this.cmd.Parameters.AddWithValue("@male", p.Male);
                 this.cmd.Parameters.AddWithValue("@reg", p.RegisterDate);
                 this.cmd.Parameters.AddWithValue("@mail", p.Email);
-                this.cmd.CommandText = "insert into Person(Name, Password, BirthDate, Height, Weight, Male, RegisterDate, Email) " +
-                                    "values(@name, @pw, @birth, @height, @weight, @male, @reg, @mail);";
+                this.cmd.Parameters.AddWithValue("@goal", p.Goal);
+                this.cmd.CommandText = "insert into Person(Name, Password, BirthDate, Height, Weight, Male, RegisterDate, Email, Goal) " +
+                                    "values(@name, @pw, @birth, @height, @weight, @male, @reg, @mail, @goal);";
                 this.conn.Open();
                 if (this.conn.State.Equals(ConnectionState.Open))
                 {
@@ -59,7 +60,8 @@
                                     this.read.GetDouble(5), //["Weight"],
                                     this.Check(this.read.GetString(6)), //["Male"],
                                     this.read.GetDateTime(7), //["RegisterDate"],
-                                    this.Check(this.read.GetString(8)) //["Email"] )
+                                    this.Check(this.read.GetString(8)), //["Email"] )
+                                    this.read.GetInt32(9)   // ["Goal"]
                                 ));
                     return res;
                 }
@@ -89,7 +91,9 @@
                                     this.read.GetDouble(5), //["Weight"],
                                     this.Check(this.read.GetString(6)), //["Male"],
                                     this.read.GetDateTime(7), //["RegisterDate"],
-                                    this.Check(this.read.GetString(8))); //["Email"] )
+                                    this.Check(this.read.GetString(8)), //["Email"] )
+                                    this.read.GetInt32(9)   // ["Goal"]
+                                   );
                     return null;
                 }
                 else throw new Exception();
