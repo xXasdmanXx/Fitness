@@ -16,7 +16,7 @@
             {
                 this.cmd.Parameters.AddWithValue("@id", value.ID);
                 this.cmd.Parameters.AddWithValue("@date", value.Date);
-                this.cmd.CommandText = @"select Mets.ID, Mets.MET, Mets.Detailed, Exercise.Duration, Exercise.[Date] " +
+                this.cmd.CommandText = @"select Exercise.id, Mets.MET, Mets.Detailed, Exercise.Duration, Exercise.[Date] " +
                                         @"from Exercise inner join Mets on Mets.ID = Exercise.Mets_ID " +
                                         @"where Exercise.Person_ID = @id and cast(Exercise.[Date] as date) = convert(date, @date)";
                 this.conn.Open();
@@ -25,7 +25,7 @@
                     this.read = this.cmd.ExecuteReader();
                     while (this.read.Read())
                         tmpMet.Add(new Met(
-                                this.read.GetInt32(0),
+                                this.read.GetInt32(0),  // ["ID"]
                                 this.read.GetDouble(1),  // ["MET"]
                                 this.Check(this.read.GetString(2)),  // ["Detailed"]
                                 this.read.GetDouble(3),  // ["Duration"]
