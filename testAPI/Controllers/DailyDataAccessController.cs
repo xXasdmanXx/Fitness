@@ -11,7 +11,10 @@
         {
             List<Met> tmpMet = new List<Met>();
             double weight = 0;
+            double height = 0;
             int goal = 0;
+            int age = 0;
+            string male = "male";
             try
             {
                 this.cmd.Parameters.AddWithValue("@id", value.ID);
@@ -36,15 +39,19 @@
 
                 this.conn.Close();
 
-                this.cmd.CommandText = @"select top 1 Weight, Goal from Person where ID = @id";
+                this.cmd.CommandText = @"select top 1 Height, Weight, Male, Goal, DATEDIFF(YEAR, BirthDate, GETDATE()) as Age from Person where ID = @id";
                 this.conn.Open();
                 if(this.conn.State.Equals(ConnectionState.Open))
                 {
                     this.read = this.cmd.ExecuteReader();
                     if(this.read.Read())
                     {
-                        weight = this.read.GetDouble(0);
-                        goal = this.read.GetInt32(1);
+                        /*Height Weight  Male Goal    Age*/
+                        height = this.read.GetDouble(0);
+                        weight = this.read.GetDouble(1);
+                        male = this.read.GetString(2);
+                        goal = this.read.GetInt32(3);
+                        age = this.read.GetInt32(4);
                     }
                 }
 
@@ -73,7 +80,7 @@
 
                 tmpMet.TrimExcess();
                 tmpFood.TrimExcess();
-                return new DailyAll(tmpMet, tmpFood, weight, goal);
+                return new DailyAll(tmpMet, tmpFood, height, weight, male, goal, age);
             }
             catch(Exception e) { System.Diagnostics.Debug.WriteLine(e.Message); return null; }
             finally { this.EndQuery(); }
