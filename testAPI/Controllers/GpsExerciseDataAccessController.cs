@@ -28,7 +28,7 @@
                 else throw new Exception("Connection is not open.");
 
                 // get id of inserted element (GpsExercise row)
-                cmd.CommandText = @"select Scope_Identity();";
+                cmd.CommandText = @"select top 1 id from GpsExercise order by start desc";
                 this.conn.Open();
                 if(this.conn.State.Equals(ConnectionState.Open))
                 {
