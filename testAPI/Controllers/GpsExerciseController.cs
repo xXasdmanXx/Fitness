@@ -6,19 +6,13 @@
 
     public class GpsExerciseController : ApiController
     {
-        /*// GET: api/GpsExercise
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/GpsExercise/5
-        public string Get(int id)
+        [HttpGet]
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            return Json(new GpsExerciseDataAccessController().Select(id));
         }
-        */
-
+        
         // POST: api/GpsExercise
         [HttpPost]
         public IHttpActionResult Post([FromBody]GpsExercise value)
@@ -26,9 +20,11 @@
             return Content(HttpStatusCode.OK, new GpsExerciseDataAccessController().Insert(value));
         }
 
-        /*// DELETE: api/GpsExercise/5
-        public void Delete(int id)
+        // DELETE: api/GpsExercise/5
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-        }*/
+            return (new GpsExerciseDataAccessController().Delete(id) ? Content(HttpStatusCode.OK, 1) : Content(HttpStatusCode.NotFound, 0));
+        }
     }
 }

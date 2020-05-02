@@ -1,11 +1,13 @@
 ﻿namespace FitnessApp.Models
 {
+    using System.Data.SqlTypes;
+
     public class GpsPath
     {
-        public decimal Lat { get; set; }
-        public decimal Lng { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
 
-        public GpsPath(decimal lat, decimal lng)
+        public GpsPath(double lat, double lng)
         {
             this.Lat = lat;
             this.Lng = lng;

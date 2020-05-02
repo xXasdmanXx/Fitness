@@ -2,6 +2,7 @@
 {
     using Models;
     using System;
+    using System.Collections.Generic;
     using System.Data;
 
     public class GpsExerciseDataAccessController : DataAccessController
@@ -56,6 +57,64 @@
                 return 1;
             }
             catch (Exception e) { System.Diagnostics.Debug.WriteLine("\n\n" + e.Message + "\n\n"); return 0; }
+            finally { this.EndQuery(); }
+        }
+
+        public GpsExercise Select(int id)
+        {
+            try
+            {
+                List<GpsPath> paths = new List<GpsPath>();
+                cmd.Parameters.AddWithValue("@id", id);
+                this.cmd.CommandText = @"select latitude, longitude from GpsPath where exercise_id = @id;";
+                this.conn.Open();
+                if (conn.State.Equals(ConnectionState.Open))
+                {
+                    this.read = cmd.ExecuteReader();
+                    while (this.read.Read())
+                        paths.Add(new GpsPath(this.read.GetDouble(0), this.read.GetDouble(1)));
+                    conn.Close();
+
+                    this.cmd.CommandText = @"select userid, type, start, duration, avgSpeed, burned " +
+                                           @"from GpsExercise where id = @id;";
+                    this.conn.Open();
+                    if (conn.State.Equals(ConnectionState.Open))
+                    {
+                        this.read = cmd.ExecuteReader();
+                        while (this.read.Read())
+                            return new GpsExercise(
+                                    this.read.GetInt32(0), // userid
+                                    this.Check(this.read.GetString(1)), // type
+                                    this.read.GetDateTime(2),   // start
+                                    Math.Round(this.read.GetFloat(3),5), // duration
+                                    Math.Round(this.read.GetFloat(4),5),  // avgSpeed
+                                    Math.Round(this.read.GetFloat(5),5),   // burned
+                                    paths.ToArray() // path
+                                   );
+                        throw new Exception("Cannot read from database.");
+                    }
+                    else throw new Exception("Cannot open connection.");
+                }
+                else throw new Exception("Cannot open connection.");
+            }
+            catch (Exception e){ System.Diagnostics.Debug.WriteLine("\n\n{0}\n\n", e.Message); return null; }
+            finally { this.EndQuery(); }
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                this.cmd.Parameters.AddWithValue("@id", id);
+                this.cmd.CommandText = "delete from GpsExercise where id = @id;";
+                this.conn.Open();
+                if (conn.State.Equals(ConnectionState.Open))
+                    this.cmd.ExecuteNonQuery();
+                else throw new Exception("\n\nCannot delete from GpsExercise.\n\n");
+
+                return true;
+            }
+            catch (Exception e) { System.Diagnostics.Debug.WriteLine("\n\n{0}\n\n", e.Message); return false; }
             finally { this.EndQuery(); }
         }
     }
