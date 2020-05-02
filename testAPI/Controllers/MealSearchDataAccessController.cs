@@ -23,11 +23,6 @@
                     this.read = this.cmd.ExecuteReader();
                     while (this.read.Read())
                     {
-                        //List<string> units = new List<string>();
-                        //units.Add(Check(this.read.GetString(10)));
-                        //units.Add(Check(this.read.GetString(11)));
-                        //units.Add(Check(this.read.GetString(12)));
-                        //units.TrimExcess();
                         res.Add(new FoodNutritions(
                             this.read.GetInt64(0),
                             this.Check(this.read.GetString(1)),
@@ -39,7 +34,6 @@
                             this.read.GetDouble(7), // water
                             this.read.GetDouble(8), // sugar
                             this.read.GetDouble(9)  // cholesterol
-                            //,units
                             ));
                     }
                     return res;
