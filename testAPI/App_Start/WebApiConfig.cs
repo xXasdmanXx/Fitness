@@ -18,6 +18,11 @@
                 routeTemplate: "api/Search/{controller}",
                 defaults: new { id = RouteParameter.Optional }
                 );
+            config.Routes.MapHttpRoute(
+                name: "ExtendPersonApi",
+                routeTemplate: "api/Person/GpsExercise/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
     }

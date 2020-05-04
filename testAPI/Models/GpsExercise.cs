@@ -22,5 +22,16 @@
             this.Burned = burned;
             this.Path = path;
         }
+
+        public GpsExercise(int userID, string type, DateTime start, double duration, double avgSpeed, double burned)
+        {
+            this.UserID = userID;
+            this.Type = type;
+            this.Start = start;
+            this.Duration = duration;
+            this.AvgSpeed = avgSpeed;
+            this.Burned = burned;
+        }
+
     }
 }

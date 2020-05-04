@@ -143,6 +143,7 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AllExerciseController.cs" />
     <Compile Include="Controllers\DailyController.cs" />
     <Compile Include="Controllers\DailyDataAccessController.cs" />
     <Compile Include="Controllers\DataAccessController.cs" />

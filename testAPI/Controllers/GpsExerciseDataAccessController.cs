@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
 
     public class GpsExerciseDataAccessController : DataAccessController
     {
@@ -98,6 +99,59 @@
                 else throw new Exception("Cannot open connection.");
             }
             catch (Exception e){ System.Diagnostics.Debug.WriteLine("\n\n{0}\n\n", e.Message); return null; }
+            finally { this.EndQuery(); }
+        }
+
+        public List<GpsExercise> SelectAll(int id)
+        {
+            List<GpsExercise> res = new List<GpsExercise>();
+
+            try
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                this.cmd.CommandText = @"select id, type, start, duration, avgSpeed, burned " +
+                                        @"from GpsExercise where userid = @id;";
+                this.conn.Open();
+                if (conn.State.Equals(ConnectionState.Open))
+                {
+                    this.read = this.cmd.ExecuteReader();
+                    while (this.read.Read())
+                    {
+                        /* USERID contains tha actual ID of Exercise in this case */
+                        int userID = this.read.GetInt32(0);
+                        string type = this.Check(this.read.GetString(1)); // type
+                        DateTime start = this.read.GetDateTime(2);   // start
+                        double duration = Math.Round(this.read.GetFloat(3), 5); // duration
+                        double avgSpeed = Math.Round(this.read.GetFloat(4), 5);  // avgSpeed
+                        double burned = Math.Round(this.read.GetFloat(5), 5);   // burned
+
+                        res.Add(new GpsExercise(userID, type, start, duration, avgSpeed, burned));
+                    }
+                    this.conn.Close();
+
+                    this.cmd.CommandText = @"select latitude, longitude from GpsPath where exercise_id = @id";
+                    foreach (GpsExercise item in res)
+                    {
+                        this.cmd.Parameters.Clear();
+                        this.cmd.Parameters.AddWithValue("@id", item.UserID);
+
+                        this.conn.Open();
+                        if (conn.State.Equals(ConnectionState.Open))
+                        {
+                            SqlDataReader r = this.cmd.ExecuteReader();
+                            List<GpsPath> paths = new List<GpsPath>();
+                            while (r.Read())
+                                paths.Add(new GpsPath(r.GetDouble(0), r.GetDouble(1)));
+                            this.conn.Close();
+                            item.Path = paths.ToArray();
+                        }
+                        else throw new Exception("Cannot open connection.");
+                    }
+                    return res;
+                }
+                else throw new Exception("Cannot open connection.");
+            }
+            catch (Exception e) { System.Diagnostics.Debug.WriteLine("\n\n{0}\n\n", e.Message); return null; }
             finally { this.EndQuery(); }
         }
 
