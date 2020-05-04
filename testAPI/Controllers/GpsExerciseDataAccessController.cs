@@ -125,7 +125,7 @@
                         double avgSpeed = Math.Round(this.read.GetFloat(4), 5);  // avgSpeed
                         double burned = Math.Round(this.read.GetFloat(5), 5);   // burned
 
-                        res.Add(new GpsExercise(userID, type, start, duration, avgSpeed, burned));
+                        res.Add(new GpsExercise(userID, type, start, duration, avgSpeed, burned, new GpsPath[0] ));
                     }
                     this.conn.Close();
 
