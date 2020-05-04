@@ -35,7 +35,7 @@
                                 this.read.GetDateTime(4)    // ["Date"]
                                 ));
                 }
-                else throw new Exception();
+                else throw new Exception("Cannot open connection.");
 
                 this.conn.Close();
 
@@ -46,14 +46,14 @@
                     this.read = this.cmd.ExecuteReader();
                     if(this.read.Read())
                     {
-                        /*Height Weight  Male Goal    Age*/
-                        height = this.read.GetDouble(0);
-                        weight = this.read.GetDouble(1);
-                        male = this.read.GetString(2);
-                        goal = this.read.GetInt32(3);
-                        age = this.read.GetInt32(4);
+                        height = this.read.GetDouble(0);    // Height
+                        weight = this.read.GetDouble(1);    // Weight
+                        male = this.read.GetString(2);  // Male
+                        goal = this.read.GetInt32(3);   // Goal
+                        age = this.read.GetInt32(4);    // Age
                     }
                 }
+                else throw new Exception("Cannot open connection.");
 
                 this.conn.Close();
 
@@ -76,13 +76,13 @@
                             this.read.GetDouble(6),
                             this.read.GetDateTime(7)));
                 }
-                else throw new Exception();
+                else throw new Exception("Cannot open connection.");
 
                 tmpMet.TrimExcess();
                 tmpFood.TrimExcess();
-                return new DailyAll(tmpMet, tmpFood, height, weight, male, goal, age);
+                return new DailyAll(tmpMet, tmpFood, new GpsExerciseDataAccessController().SelectAll(value.ID), height, weight, male, goal, age);
             }
-            catch(Exception e) { System.Diagnostics.Debug.WriteLine(e.Message); return null; }
+            catch(Exception e) { System.Diagnostics.Debug.WriteLine("\n\n{0}\n\n", e.Message); return null; }
             finally { this.EndQuery(); }
         }
     }
